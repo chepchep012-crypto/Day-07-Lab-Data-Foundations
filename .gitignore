@@ -8,6 +8,9 @@ __pycache__/
 .env
 .env.local
 
+# Vector database (ChromaDB persistent store)
+chroma_db/
+
 # OS
 .DS_Store
 

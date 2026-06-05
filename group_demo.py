@@ -53,7 +53,8 @@ def load_manifest_documents() -> list[dict]:
 
 
 def build_store(raw_docs: list[dict], chunker) -> EmbeddingStore:
-    store = EmbeddingStore(collection_name="cs_faq", embedding_fn=embedder)
+    # use_chroma=True -> persist embeddings to a real ChromaDB on disk (./chroma_db)
+    store = EmbeddingStore(collection_name="cs_faq", embedding_fn=embedder, use_chroma=True)
     chunk_docs: list[Document] = []
     for d in raw_docs:
         for i, chunk in enumerate(chunker.chunk(d["content"])):
