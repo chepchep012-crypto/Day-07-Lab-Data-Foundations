@@ -1,6 +1,6 @@
 # Báo Cáo Lab 7: Embedding & Vector Store
 
-**Họ tên:** [Tên sinh viên]
+**Họ tên:** [Nguyễn Đức Toàn]
 **Nhóm:** [Tên nhóm]
 **Ngày:** [Ngày nộp]
 
