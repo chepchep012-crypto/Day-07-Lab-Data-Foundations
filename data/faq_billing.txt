@@ -1,19 +1,27 @@
-Billing FAQ for the AI Knowledge Assistant
+Billing, Plans, and Payments FAQ for the AI Knowledge Assistant
+
+This article explains accepted payment methods, billing cycles, refunds, and how to change or cancel a plan. Amounts are shown in USD. The workspace Admin is the only role that can view or change billing.
 
 Which payment methods are accepted?
-The assistant accepts Visa, Mastercard, and American Express credit cards, plus invoiced bank transfer for annual Enterprise plans. Debit cards and PayPal are not supported. Card payments are processed in USD.
+The assistant accepts Visa, Mastercard, and American Express credit cards, plus invoiced bank transfer for annual Enterprise plans. Debit cards and PayPal are not supported. Card payments are processed in USD, and the bank statement descriptor is "Knowledge Assistant Inc".
+
+What plans are available and what do they cost?
+There are three plans. Free costs nothing and is meant for individuals. Pro costs 20 USD per seat per month, or 200 USD per seat per year, which saves about two months. Enterprise is custom-priced, billed annually by invoice, and adds SSO, audit logs, and a higher rate limit. You can compare features on the pricing page before subscribing.
 
 Why was my card declined?
-The three most common reasons are: an expired card, insufficient funds, or the bank blocking an international charge. Update the card under Settings > Billing > Payment method, then click "Retry payment". If the charge keeps failing, contact your bank to allow charges from "Knowledge Assistant Inc".
-
-How do I get a refund?
-Refunds are available within 14 days of a charge for monthly plans. Open Settings > Billing > History, find the charge, and click "Request refund". The amount returns to the original card within 5 to 10 business days. Annual plans are non-refundable after 14 days but can be canceled to stop renewal.
-
-How do I upgrade or downgrade my plan?
-Go to Settings > Billing > Plan and choose a new tier. Upgrades take effect immediately and are prorated. Downgrades take effect at the start of the next billing cycle so you keep paid features until then.
+The three most common reasons are an expired card, insufficient funds, or the bank blocking an international charge. Update the card under Settings > Billing > Payment method, then click "Retry payment". If the charge keeps failing, contact your bank and ask them to allow charges from "Knowledge Assistant Inc". After three failed attempts the workspace is downgraded to read-only until a valid payment succeeds.
 
 When am I charged each month?
-Monthly subscriptions are charged on the same calendar day you first subscribed. If that day does not exist in a given month, the charge moves to the last day of that month. An invoice is emailed to the workspace Admin on every charge.
+Monthly subscriptions are charged on the same calendar day you first subscribed. If that day does not exist in a given month, the charge moves to the last day of that month. An invoice is emailed to the workspace Admin on every successful charge, and all past invoices are available under Settings > Billing > History.
+
+How do I get a refund?
+Refunds are available within 14 days of a charge for monthly plans. Open Settings > Billing > History, find the charge, and click "Request refund". The amount returns to the original card within 5 to 10 business days. Annual plans are non-refundable after 14 days, but you can cancel to stop the next renewal. Refunds above 200 USD require Billing-team approval and may take one extra business day.
+
+How do I upgrade or downgrade my plan?
+Go to Settings > Billing > Plan and choose a new tier. Upgrades take effect immediately and the price is prorated for the remainder of the current cycle. Downgrades take effect at the start of the next billing cycle, so you keep paid features until then. Downgrading below your current usage, such as exceeding the document limit, is blocked until you remove the excess.
 
 How do I cancel my subscription?
-Open Settings > Billing > Plan and click "Cancel subscription". Access continues until the end of the current paid period, after which the workspace switches to the free tier. Cancellation does not delete your documents.
+Open Settings > Billing > Plan and click "Cancel subscription". Access to paid features continues until the end of the current paid period, after which the workspace switches to the free tier. Cancellation does not delete your documents, but any documents above the Free limit of 50 become read-only until you delete enough to fit.
+
+Can I get a VAT or tax invoice for my company?
+Yes. Add your company's legal name, address, and tax or VAT number under Settings > Billing > Company details before the next charge. Invoices generated afterward will include those details. For corrections to an already-issued invoice, contact the Billing team with the invoice number.

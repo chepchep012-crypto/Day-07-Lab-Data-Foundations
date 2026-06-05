@@ -1,16 +1,24 @@
-Câu Hỏi Thường Gặp về Thiết Lập Tài Khoản — Trợ Lý Tri Thức AI
+Câu Hỏi Thường Gặp về Thiết Lập Tài Khoản và Quản Lý Workspace — Trợ Lý Tri Thức AI
+
+Bài viết này hướng dẫn cách tạo tài khoản, xác minh email, mời thành viên và chọn vai trò phù hợp. Bài dành cho khách hàng tự quản trị workspace của mình.
 
 Làm thế nào để tạo tài khoản mới?
-Mở trang đăng ký tại app.assistant.example/signup, nhập email công việc và bấm "Tạo tài khoản". Email xác minh sẽ đến trong vòng 2 phút. Bấm vào liên kết trong email để kích hoạt tài khoản. Nếu không thấy email, hãy kiểm tra thư mục spam trước khi yêu cầu gửi lại.
+Mở trang đăng ký tại app.assistant.example/signup, nhập email công việc và bấm "Tạo tài khoản". Email xác minh sẽ được gửi trong vòng 2 phút. Bấm vào liên kết trong email đó để kích hoạt tài khoản. Email cá nhân như gmail.com được chấp nhận ở gói Free, nhưng gói Pro và Enterprise yêu cầu email theo tên miền công ty. Nếu không thấy email xác minh, hãy kiểm tra thư mục spam trước khi yêu cầu gửi lại.
 
 Làm thế nào để xác minh địa chỉ email?
-Sau khi đăng ký, mở thư có tiêu đề "Xác minh tài khoản Trợ Lý Tri Thức" và bấm nút "Xác minh email" màu xanh. Liên kết hết hạn sau 24 giờ. Nếu đã hết hạn, quay lại trang đăng nhập và bấm "Gửi lại xác minh" để nhận liên kết mới.
-
-Làm thế nào để mời đồng nghiệp vào workspace?
-Vào Cài đặt > Thành viên > Mời, nhập email công việc của từng người, chọn vai trò (Quản trị, Biên tập, hoặc Người xem) rồi bấm "Gửi lời mời". Người được mời nhận email và phải chấp nhận trong vòng 7 ngày. Chỉ Quản trị viên mới có quyền mời thành viên mới.
-
-Ba vai trò thành viên là gì?
-Quản trị (Admin) quản lý thanh toán, thành viên và toàn bộ tài liệu. Biên tập (Editor) tạo và sửa tài liệu nhưng không đổi được thanh toán. Người xem (Viewer) chỉ đọc tài liệu và tìm kiếm. Có thể đổi vai trò bất cứ lúc nào trong Cài đặt > Thành viên.
+Sau khi đăng ký, mở thư có tiêu đề "Xác minh tài khoản Trợ Lý Tri Thức" và bấm nút "Xác minh email" màu xanh. Liên kết xác minh hết hạn sau 24 giờ. Nếu đã hết hạn, quay lại trang đăng nhập và bấm "Gửi lại xác minh" để nhận liên kết mới. Bạn không thể đăng nhập hoặc mời đồng nghiệp cho đến khi email được xác minh.
 
 Tại sao tôi không đăng nhập được ngay sau khi đăng ký?
-Việc đăng nhập bị chặn cho đến khi email được xác minh. Hãy hoàn tất bước xác minh trước. Nếu đã xác minh email mà vẫn không đăng nhập được, hãy đặt lại mật khẩu từ trang đăng nhập.
+Việc đăng nhập bị chặn cho đến khi email được xác minh, nên hãy hoàn tất bước xác minh trước. Nếu đã xác minh email mà vẫn không đăng nhập được, có thể workspace của bạn dùng Đăng nhập một lần (SSO), khi đó bạn phải đăng nhập qua nhà cung cấp danh tính của công ty thay vì bằng mật khẩu. Nếu không phải vậy, hãy đặt lại mật khẩu từ trang đăng nhập.
+
+Làm thế nào để mời đồng nghiệp vào workspace?
+Vào Cài đặt > Thành viên > Mời, nhập email công việc của từng người, chọn vai trò (Quản trị, Biên tập, hoặc Người xem) rồi bấm "Gửi lời mời". Người được mời nhận email và phải chấp nhận trong vòng 7 ngày, sau đó lời mời hết hạn và phải gửi lại. Chỉ Quản trị viên mới có quyền mời thành viên mới. Mỗi gói có giới hạn ghế: Free gồm 3 ghế, Pro gồm 25 ghế, còn Enterprise theo hợp đồng.
+
+Ba vai trò thành viên là gì?
+Quản trị (Admin) quản lý thanh toán, thành viên, tích hợp và toàn bộ tài liệu. Biên tập (Editor) tạo, sửa và xóa tài liệu nhưng không đổi được thanh toán hay xóa thành viên. Người xem (Viewer) chỉ đọc tài liệu và tìm kiếm. Có thể đổi vai trò bất cứ lúc nào trong Cài đặt > Thành viên, và workspace luôn phải có ít nhất một Quản trị viên.
+
+Làm thế nào để chuyển quyền sở hữu workspace?
+Chỉ Quản trị viên chính hiện tại mới chuyển được quyền sở hữu. Vào Cài đặt > Thành viên, mở menu cạnh thành viên muốn chuyển và chọn "Đặt làm Quản trị viên chính". Chủ sở hữu mới lập tức nhận trách nhiệm thanh toán, còn chủ cũ bị hạ xuống Quản trị viên thường. Không thể chuyển quyền sở hữu cho Người xem.
+
+Làm thế nào để xóa workspace?
+Quản trị viên có thể xóa workspace trong Cài đặt > Vùng nguy hiểm > Xóa workspace. Việc xóa sẽ loại bỏ toàn bộ tài liệu, thành viên và embedding sau thời gian ân hạn 7 ngày, trong thời gian này vẫn có thể hoàn tác bằng cách liên hệ hỗ trợ. Phải hủy mọi gói trả phí đang hoạt động trước khi xóa được workspace.
