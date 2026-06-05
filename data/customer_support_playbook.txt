@@ -1,11 +1,21 @@
 Customer Support Playbook for the AI Knowledge Assistant
 
-The support team uses the knowledge assistant to answer repetitive questions about account setup, billing errors, password recovery, and service limitations. To make retrieval useful, the indexed documents should contain clear issue descriptions, step-by-step resolutions, escalation criteria, and references to the owning team.
+The support team uses the knowledge assistant to answer repetitive questions about account setup, billing errors, password recovery, and service limits. This playbook explains how to write content that retrieves well and how to handle a ticket from first response to closure. It is an internal reference for agents.
 
-When writing support content, authors should avoid vague statements such as "check the settings" or "contact engineering if needed." Instead, each article should specify the exact page, button, or log source that an agent should inspect. Specific language makes chunks more useful because the retriever can match concrete troubleshooting terms found in the user's question.
+Why content quality decides retrieval quality.
+The retriever can only return what is written clearly. Authors should avoid vague statements such as "check the settings" or "contact engineering if needed". Instead, each article should specify the exact page, button, or log source that an agent should inspect. Specific language makes chunks more useful because the retriever can match concrete troubleshooting terms found in the user's question.
 
-Metadata should distinguish between customer-facing articles, internal support-only notes, and engineering-only incident documents. If these sources are mixed together without filtering, the assistant may surface internal-only procedures to the wrong audience or retrieve engineering details when the user only needs a short customer-safe explanation.
+How to structure a support article.
+Start each article with a one-line summary of what it covers and who it is for. Group the body into short question-and-answer blocks, one topic per block, separated by a blank line. Keep each answer self-contained so that a single retrieved chunk still makes sense without the surrounding text. Put the most common question first, because users phrase their searches like the top questions.
 
-A high-quality support assistant should also recognize when retrieval is insufficient. For example, if no document explains a newly introduced billing issue, the system should recommend escalation instead of improvising a risky answer. In practice, honest uncertainty is better than a polished but incorrect response.
+Why metadata and audience matter.
+Metadata should distinguish between customer-facing articles, internal support-only notes, and engineering-only incident documents. If these sources are mixed together without filtering, the assistant may surface internal-only procedures to the wrong audience or retrieve engineering details when the user only needs a short customer-safe explanation. Tag every article with its category, language, and audience before indexing.
 
-To maintain reliability, the support operations team should review failed queries every week. Those reviews often reveal missing documents, poor chunk boundaries, or stale articles that still rank highly because their language overlaps with common queries.
+How to handle a ticket end to end.
+Read the full message before replying, and restate the problem in one sentence to confirm understanding. Search the knowledge base with the customer's own words first, then with a rephrased version, since embeddings reward paraphrases. Send the relevant FAQ steps, ask the customer to confirm the result, and only escalate when the documented steps do not resolve the issue.
+
+When retrieval is not enough.
+A high-quality support assistant should recognize when retrieval is insufficient. For example, if no document explains a newly introduced billing issue, the system should recommend escalation instead of improvising a risky answer. In practice, honest uncertainty is better than a polished but incorrect response.
+
+How to measure whether the assistant is helping.
+Track how often the top three retrieved chunks actually answer the question, not just whether the system returned something. The support operations team should review failed queries every week. Those reviews often reveal missing documents, poor chunk boundaries, or stale articles that still rank highly because their language overlaps with common queries. The fix is usually to rewrite or split the source article, not to change the model.

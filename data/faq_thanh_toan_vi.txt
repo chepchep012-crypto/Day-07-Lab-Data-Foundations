@@ -1,16 +1,27 @@
-Câu Hỏi Thường Gặp về Thanh Toán — Trợ Lý Tri Thức AI
+Câu Hỏi Thường Gặp về Thanh Toán, Gói Dịch Vụ và Hoàn Tiền — Trợ Lý Tri Thức AI
+
+Bài viết này giải thích các phương thức thanh toán, chu kỳ tính phí, hoàn tiền và cách đổi hoặc hủy gói. Số tiền hiển thị bằng USD. Chỉ vai trò Quản trị viên mới xem và thay đổi được thanh toán.
 
 Những phương thức thanh toán nào được chấp nhận?
-Trợ lý chấp nhận thẻ tín dụng Visa, Mastercard và American Express, cùng với chuyển khoản ngân hàng theo hóa đơn cho gói Enterprise trả theo năm. Thẻ ghi nợ và PayPal không được hỗ trợ. Thanh toán bằng thẻ được xử lý bằng đơn vị USD.
+Trợ lý chấp nhận thẻ tín dụng Visa, Mastercard và American Express, cùng với chuyển khoản ngân hàng theo hóa đơn cho gói Enterprise trả theo năm. Thẻ ghi nợ và PayPal không được hỗ trợ. Thanh toán bằng thẻ được xử lý bằng USD, và mô tả trên sao kê ngân hàng là "Knowledge Assistant Inc".
+
+Có những gói nào và giá bao nhiêu?
+Có ba gói. Gói Free miễn phí, dành cho cá nhân. Gói Pro giá 20 USD mỗi ghế mỗi tháng, hoặc 200 USD mỗi ghế mỗi năm, tiết kiệm khoảng hai tháng. Gói Enterprise có giá tùy chỉnh, tính phí theo năm qua hóa đơn, và bổ sung SSO, nhật ký kiểm toán cùng giới hạn tốc độ cao hơn.
 
 Tại sao thẻ của tôi bị từ chối?
-Ba nguyên nhân phổ biến nhất là: thẻ hết hạn, số dư không đủ, hoặc ngân hàng chặn giao dịch quốc tế. Hãy cập nhật thẻ tại Cài đặt > Thanh toán > Phương thức, rồi bấm "Thử lại thanh toán". Nếu vẫn lỗi, hãy liên hệ ngân hàng để cho phép giao dịch từ "Knowledge Assistant Inc".
-
-Làm thế nào để được hoàn tiền?
-Hoàn tiền áp dụng trong vòng 14 ngày kể từ ngày bị tính phí đối với gói theo tháng. Mở Cài đặt > Thanh toán > Lịch sử, tìm khoản phí và bấm "Yêu cầu hoàn tiền". Số tiền sẽ trở lại thẻ gốc trong 5 đến 10 ngày làm việc. Gói theo năm không hoàn tiền sau 14 ngày nhưng có thể hủy để dừng gia hạn.
+Ba nguyên nhân phổ biến nhất là thẻ hết hạn, số dư không đủ, hoặc ngân hàng chặn giao dịch quốc tế. Hãy cập nhật thẻ tại Cài đặt > Thanh toán > Phương thức, rồi bấm "Thử lại thanh toán". Nếu vẫn lỗi, hãy liên hệ ngân hàng để cho phép giao dịch từ "Knowledge Assistant Inc". Sau ba lần thất bại, workspace bị hạ về chế độ chỉ đọc cho đến khi thanh toán thành công.
 
 Tôi bị tính phí vào ngày nào mỗi tháng?
-Gói theo tháng được tính phí vào đúng ngày trong tháng mà bạn đăng ký lần đầu. Nếu ngày đó không tồn tại trong một tháng nào đó, khoản phí sẽ dời sang ngày cuối cùng của tháng. Hóa đơn được gửi qua email cho Quản trị viên workspace mỗi lần tính phí.
+Gói theo tháng được tính phí vào đúng ngày trong tháng mà bạn đăng ký lần đầu. Nếu ngày đó không tồn tại trong một tháng nào đó, khoản phí sẽ dời sang ngày cuối cùng của tháng. Hóa đơn được gửi qua email cho Quản trị viên workspace mỗi lần tính phí thành công, và toàn bộ hóa đơn cũ có trong Cài đặt > Thanh toán > Lịch sử.
+
+Làm thế nào để được hoàn tiền?
+Hoàn tiền áp dụng trong vòng 14 ngày kể từ ngày bị tính phí đối với gói theo tháng. Mở Cài đặt > Thanh toán > Lịch sử, tìm khoản phí và bấm "Yêu cầu hoàn tiền". Số tiền sẽ trở lại thẻ gốc trong 5 đến 10 ngày làm việc. Gói theo năm không hoàn tiền sau 14 ngày, nhưng có thể hủy để dừng gia hạn kế tiếp. Khoản hoàn trên 200 USD cần Đội Thanh toán phê duyệt.
+
+Làm thế nào để nâng hoặc hạ gói?
+Vào Cài đặt > Thanh toán > Gói và chọn bậc mới. Nâng gói có hiệu lực ngay và giá được tính theo tỷ lệ cho phần còn lại của chu kỳ. Hạ gói có hiệu lực vào đầu chu kỳ tính phí kế tiếp, nên bạn vẫn giữ tính năng trả phí cho đến lúc đó. Hạ xuống thấp hơn mức đang dùng, ví dụ vượt giới hạn tài liệu, sẽ bị chặn cho đến khi bạn xóa bớt phần dư.
 
 Làm thế nào để hủy đăng ký?
-Mở Cài đặt > Thanh toán > Gói và bấm "Hủy đăng ký". Quyền truy cập vẫn còn đến hết kỳ đã trả phí, sau đó workspace chuyển về gói miễn phí. Việc hủy không xóa tài liệu của bạn.
+Mở Cài đặt > Thanh toán > Gói và bấm "Hủy đăng ký". Quyền truy cập tính năng trả phí vẫn còn đến hết kỳ đã trả phí, sau đó workspace chuyển về gói miễn phí. Việc hủy không xóa tài liệu của bạn, nhưng tài liệu vượt quá giới hạn 50 của gói Free sẽ thành chỉ đọc cho đến khi bạn xóa bớt cho vừa.
+
+Tôi có lấy được hóa đơn VAT cho công ty không?
+Có. Thêm tên pháp lý, địa chỉ và mã số thuế hoặc VAT của công ty trong Cài đặt > Thanh toán > Thông tin công ty trước kỳ tính phí kế tiếp. Các hóa đơn tạo sau đó sẽ kèm thông tin này. Để chỉnh hóa đơn đã phát hành, hãy liên hệ Đội Thanh toán kèm số hóa đơn.

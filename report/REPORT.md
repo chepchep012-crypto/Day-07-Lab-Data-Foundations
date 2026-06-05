@@ -52,14 +52,14 @@
 
 | # | Tên tài liệu | Nguồn | Số ký tự | Metadata đã gán |
 |---|--------------|-------|----------|-----------------|
-| 1 | customer_support_playbook.txt | Mẫu có sẵn của lab | 1703 | category=general, language=en, audience=agent |
-| 2 | faq_account_setup.txt | Nhóm tự soạn | 1429 | category=account, language=en, audience=customer |
-| 3 | faq_billing.txt | Nhóm tự soạn | 1711 | category=billing, language=en, audience=customer |
-| 4 | faq_password_recovery.txt | Nhóm tự soạn | 1567 | category=password, language=en, audience=customer |
-| 5 | faq_service_limits.txt | Nhóm tự soạn | 1427 | category=limits, language=en, audience=customer |
-| 6 | faq_thiet_lap_tai_khoan_vi.txt | Nhóm tự soạn (VI) | 1888 | category=account, language=vi, audience=customer |
-| 7 | faq_thanh_toan_vi.txt | Nhóm tự soạn (VI) | 1914 | category=billing, language=vi, audience=customer |
-| 8 | escalation_policy.md | Nhóm tự soạn | 1866 | category=escalation, language=en, audience=agent |
+| 1 | customer_support_playbook.txt | Nhóm soạn (mở rộng từ mẫu) | 2959 | category=general, language=en, audience=agent |
+| 2 | faq_account_setup.txt | Nhóm tự soạn | 2983 | category=account, language=en, audience=customer |
+| 3 | faq_billing.txt | Nhóm tự soạn | 3298 | category=billing, language=en, audience=customer |
+| 4 | faq_password_recovery.txt | Nhóm tự soạn | 2995 | category=password, language=en, audience=customer |
+| 5 | faq_service_limits.txt | Nhóm tự soạn | 2760 | category=limits, language=en, audience=customer |
+| 6 | faq_thiet_lap_tai_khoan_vi.txt | Nhóm tự soạn (VI) | 3790 | category=account, language=vi, audience=customer |
+| 7 | faq_thanh_toan_vi.txt | Nhóm tự soạn (VI) | 3995 | category=billing, language=vi, audience=customer |
+| 8 | escalation_policy.md | Nhóm tự soạn | 2835 | category=escalation, language=en, audience=agent |
 
 > Metadata cho từng file được khai báo tập trung trong `data/group_manifest.json` để nạp kèm khi tạo `Document`.
 
@@ -83,9 +83,9 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 
 | Tài liệu | Strategy | Chunk Count | Avg Length | Preserves Context? |
 |-----------|----------|-------------|------------|-------------------|
-| faq_billing.txt | FixedSizeChunker (`fixed_size`) | 12 | 188.4 | Trung bình — cắt giữa câu, có thể đứt ý |
-| faq_billing.txt | SentenceChunker (`by_sentences`) | 9 | 188.6 | Tốt — chunk trùng ranh giới câu/Q&A |
-| faq_billing.txt | RecursiveChunker (`recursive`) | 26 | 64.1 | Kém ở đây — chunk quá vụn (tách theo `. `) |
+| faq_billing.txt | FixedSizeChunker (`fixed_size`) | 22 | 197.6 | Trung bình — cắt giữa câu, có thể đứt ý |
+| faq_billing.txt | SentenceChunker (`by_sentences`) | 14 | 234.0 | Tốt — chunk trùng ranh giới câu/Q&A |
+| faq_billing.txt | RecursiveChunker (`recursive`) | 43 | 74.9 | Kém ở đây — chunk quá vụn (tách theo `. `) |
 
 ### Strategy Của Tôi
 
@@ -101,15 +101,15 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 ```python
 # Dùng built-in SentenceChunker với tham số tinh chỉnh cho FAQ:
 MY_CHUNKER = SentenceChunker(max_sentences_per_chunk=2)
-# 8 docs -> 84 chunks; mỗi chunk ~ 1 cặp Q&A.
+# 8 docs -> 139 chunks; mỗi chunk ~ 1 cặp Q&A.
 ```
 
 ### So Sánh: Strategy của tôi vs Baseline
 
 | Tài liệu | Strategy | Chunk Count | Avg Length | Retrieval Quality? |
 |-----------|----------|-------------|------------|--------------------|
-| faq_billing.txt | best baseline (fixed_size) | 12 | 188.4 | Khá, nhưng vài chunk đứt giữa câu |
-| faq_billing.txt | **của tôi (by_sentences, 2 câu)** | 9 | 188.6 | Tốt hơn — chunk trùng cặp Q&A, top-1 score cao (0.51–0.75) |
+| faq_billing.txt | best baseline (fixed_size) | 22 | 197.6 | Khá, nhưng vài chunk đứt giữa câu |
+| faq_billing.txt | **của tôi (by_sentences, 2 câu)** | 14 | 234.0 | Tốt hơn — chunk trùng cặp Q&A, top-1 score cao (0.62–0.94) |
 
 ### So Sánh Với Thành Viên Khác
 
@@ -200,11 +200,11 @@ Chạy 5 benchmark queries của nhóm trên implementation cá nhân của bạ
 
 | # | Query | Top-1 Retrieved Chunk (tóm tắt) | Score | Relevant? | Agent Answer (tóm tắt) |
 |---|-------|--------------------------------|-------|-----------|------------------------|
-| 1 | How do I reset a forgotten password? | faq_password_recovery — "How do I reset a forgotten password?…" | 0.717 | ✅ | (grounded) trích đúng FAQ reset mật khẩu |
-| 2 | Which payment methods are accepted? | faq_billing — "Which payment methods are accepted?…" | 0.508 | ✅ | (grounded) trích đúng FAQ billing |
-| 3 | How many documents can I store on the Free plan? | faq_service_limits — "How many documents…Free plan stores up to 50…" | 0.716 | ✅ | (grounded) trích đúng quota Free=50 |
-| 4 | When should an agent escalate an issue to Engineering? | escalation_policy — "When to escalate to Engineering…" | 0.489 | ✅ | (grounded) trích đúng tiêu chí escalate |
-| 5 | Làm thế nào để tạo tài khoản mới? *(filter language=vi)* | faq_thiet_lap_tai_khoan_vi — "Làm thế nào để tạo tài khoản mới?…" | 0.750 | ✅ | (grounded) trích đúng FAQ tiếng Việt |
+| 1 | How do I reset a forgotten password? | faq_password_recovery — "How do I reset a forgotten password? On the login page…" | 0.831 | ✅ | (grounded) "On the login page click 'Forgot password'…submit." |
+| 2 | Which payment methods are accepted? | faq_billing — "…Which payment methods are accepted?…" | 0.617 | ✅ | (grounded) "Visa, Mastercard, American Express… + bank transfer" |
+| 3 | How many documents can I store on the Free plan? | faq_service_limits — "…The Free plan stores up to 50 documents." | 0.935 | ✅ | (grounded) trích đúng quota Free=50 |
+| 4 | When should an agent escalate an issue to Engineering? | escalation_policy — "# Support Escalation Policy… ## Purpose…" | 0.483 | ⚠️ | top-1 là chunk intro; chunk đúng (request ID) ở rank 2 (0.480) |
+| 5 | Làm thế nào để tạo tài khoản mới? *(filter language=vi)* | faq_thiet_lap_tai_khoan_vi — "Làm thế nào để tạo tài khoản mới?…" | 0.809 | ✅ | (grounded) "Mở trang đăng ký tại app.assistant.example/signup…" |
 
 **Bao nhiêu queries trả về chunk relevant trong top-3?** 5 / 5
 
@@ -217,10 +217,10 @@ Chạy 5 benchmark queries của nhóm trên implementation cá nhân của bạ
 ### Failure Analysis (Ex 3.5)
 
 **Query nào retrieval thất bại?**
-> Q4 "When should an agent escalate an issue to Engineering?" — top-1 lại là chunk mở đầu "## Purpose / This policy tells…" (score 0.489), trong khi chunk thật sự chứa tiêu chí escalate Engineering ("Escalate to Engineering for reproducible bugs…") chỉ xếp **rank 3** (score 0.388).
+> Q4 "When should an agent escalate an issue to Engineering?" — top-1 lại là chunk mở đầu "# Support Escalation Policy … ## Purpose …" (score **0.483**), trong khi chunk thật sự chứa tiêu chí escalate Engineering ("Always attach the request ID and a screenshot…") chỉ xếp **rank 2** (score **0.480**). Khoảng cách cực sát (0.003) cho thấy chunk tổng quát suýt che mất chunk đúng.
 
 **Tại sao?**
-> SentenceChunker gộp tiêu đề markdown "## When to escalate to Engineering" với phần intro chung, làm loãng tín hiệu; đồng thời chunk "## Purpose" vô tình chứa nhiều từ khoá của query ("escalate", "specialized team"). Đây là vấn đề **chunk coherence** (ranh giới câu không trùng ranh giới section markdown) và **retrieval precision** (chunk tổng quát lấn át chunk cụ thể).
+> SentenceChunker tách theo câu nên tiêu đề markdown ("## When to escalate to Engineering") bị gộp/loãng tín hiệu; đồng thời chunk "## Purpose" vô tình chứa nhiều từ khoá của query ("escalate", "specialized team"). Đây là vấn đề **chunk coherence** (ranh giới câu không trùng ranh giới section markdown) và **retrieval precision** (chunk tổng quát lấn át chunk cụ thể).
 
 **Đề xuất cải thiện?**
 > Với tài liệu có cấu trúc markdown (như `escalation_policy.md`), nên chunk theo **header/section** thay vì theo câu, và prepend tiêu đề section vào mỗi chunk để tăng tín hiệu. Có thể thêm metadata `section` để filter, và tăng top_k lên 5 để chunk đúng vẫn lọt vào context của agent.

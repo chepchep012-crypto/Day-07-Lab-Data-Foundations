@@ -1,16 +1,24 @@
-Account Setup FAQ for the AI Knowledge Assistant
+Account Setup and Workspace Management FAQ for the AI Knowledge Assistant
+
+This article covers how to create an account, verify your email, manage workspace members, and choose the right role. It is written for customers who administer their own workspace.
 
 How do I create a new account?
-Open the sign-up page at app.assistant.example/signup, enter your work email, and click "Create account". A verification email arrives within 2 minutes. Click the verification link to activate the account. If the email does not arrive, check the spam folder before requesting a resend.
+Open the sign-up page at app.assistant.example/signup, enter your work email, and click "Create account". A verification email is sent within 2 minutes. Click the verification link in that email to activate the account. Personal email domains such as gmail.com are allowed on the Free plan, but Pro and Enterprise require a company domain. If the verification email does not arrive, check the spam folder before requesting a resend.
 
 How do I verify my email address?
-After signing up, open the message titled "Verify your Knowledge Assistant account" and click the blue "Verify email" button. The link expires after 24 hours. If it has expired, return to the login page and click "Resend verification" to receive a fresh link.
-
-How do I invite teammates to my workspace?
-Go to Settings > Members > Invite, type each teammate's work email, choose a role (Admin, Editor, or Viewer), and click "Send invites". Invited users receive an email and must accept within 7 days. Only Admins can invite new members.
-
-What are the three member roles?
-Admin can manage billing, members, and all documents. Editor can create and edit documents but cannot change billing. Viewer can only read documents and run searches. Roles can be changed at any time from Settings > Members.
+After signing up, open the message titled "Verify your Knowledge Assistant account" and click the blue "Verify email" button. The verification link expires after 24 hours. If it has expired, return to the login page and click "Resend verification" to receive a fresh link. You cannot log in or invite teammates until the email is verified.
 
 Why can I not log in right after signing up?
-Login is blocked until the email address is verified. Complete the verification step first. If you verified the email but still cannot log in, reset your password from the login page.
+Login is blocked until the email address is verified, so complete the verification step first. If you verified the email but still cannot log in, your workspace may use Single Sign-On, in which case you must log in through your company identity provider rather than with a password. If neither applies, reset your password from the login page.
+
+How do I invite teammates to my workspace?
+Go to Settings > Members > Invite, type each teammate's work email, choose a role (Admin, Editor, or Viewer), and click "Send invites". Invited users receive an email and must accept within 7 days, after which the invite expires and must be resent. Only Admins can invite new members. Each plan has a seat limit: Free includes 3 seats, Pro includes 25 seats, and Enterprise seats are set by contract.
+
+What are the three member roles?
+Admin can manage billing, members, integrations, and all documents. Editor can create, edit, and delete documents but cannot change billing or remove members. Viewer can only read documents and run searches. Roles can be changed at any time from Settings > Members, and a workspace must always keep at least one Admin.
+
+How do I transfer workspace ownership?
+Only the current primary Admin can transfer ownership. Go to Settings > Members, open the menu next to the target member, and choose "Make primary Admin". The new owner inherits billing responsibility immediately, and the previous owner is downgraded to a regular Admin. Ownership cannot be transferred to a Viewer.
+
+How do I delete my workspace?
+An Admin can delete the workspace from Settings > Danger Zone > Delete workspace. Deletion removes all documents, members, and embeddings after a 7-day grace period, during which the action can still be undone by contacting support. Active paid subscriptions must be canceled before a workspace can be deleted.
