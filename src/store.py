@@ -116,7 +116,12 @@ class EmbeddingStore:
 
         Returns True if any chunks were removed, False otherwise.
         """
+<<<<<<< HEAD
+        # TODO: remove all stored chunks where metadata['doc_id'] == doc_id
+        raise NotImplementedError("Implement EmbeddingStore.delete_document")
+=======
         remaining = [record for record in self._store if record["doc_id"] != doc_id]
         removed = len(remaining) != len(self._store)
         self._store = remaining
         return removed
+>>>>>>> 3ef2405e66a067c795d70f09e71525bf8fa1d630
