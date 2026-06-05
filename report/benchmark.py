@@ -18,6 +18,12 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+# Windows consoles default to cp1252; force UTF-8 so Vietnamese text prints.
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:  # noqa: BLE001
+    pass
+
 # Make sure THIS project's `src` package wins over any other on PYTHONPATH.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
