@@ -1,0 +1,19 @@
+Billing FAQ for the AI Knowledge Assistant
+
+Which payment methods are accepted?
+The assistant accepts Visa, Mastercard, and American Express credit cards, plus invoiced bank transfer for annual Enterprise plans. Debit cards and PayPal are not supported. Card payments are processed in USD.
+
+Why was my card declined?
+The three most common reasons are: an expired card, insufficient funds, or the bank blocking an international charge. Update the card under Settings > Billing > Payment method, then click "Retry payment". If the charge keeps failing, contact your bank to allow charges from "Knowledge Assistant Inc".
+
+How do I get a refund?
+Refunds are available within 14 days of a charge for monthly plans. Open Settings > Billing > History, find the charge, and click "Request refund". The amount returns to the original card within 5 to 10 business days. Annual plans are non-refundable after 14 days but can be canceled to stop renewal.
+
+How do I upgrade or downgrade my plan?
+Go to Settings > Billing > Plan and choose a new tier. Upgrades take effect immediately and are prorated. Downgrades take effect at the start of the next billing cycle so you keep paid features until then.
+
+When am I charged each month?
+Monthly subscriptions are charged on the same calendar day you first subscribed. If that day does not exist in a given month, the charge moves to the last day of that month. An invoice is emailed to the workspace Admin on every charge.
+
+How do I cancel my subscription?
+Open Settings > Billing > Plan and click "Cancel subscription". Access continues until the end of the current paid period, after which the workspace switches to the free tier. Cancellation does not delete your documents.

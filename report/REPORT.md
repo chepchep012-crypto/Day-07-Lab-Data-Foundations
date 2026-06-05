@@ -41,27 +41,33 @@
 
 ### Domain & Lý Do Chọn
 
-**Domain:** [ví dụ: Customer support FAQ, Vietnamese law, cooking recipes, ...]
+**Domain:** Customer Support / FAQ cho một sản phẩm SaaS ("AI Knowledge Assistant").
 
 **Tại sao nhóm chọn domain này?**
-> *Viết 2-3 câu:*
+> Customer support có cấu trúc Hỏi–Đáp rõ ràng nên dễ đánh giá chunking và viết gold answer verify được. Mỗi tài liệu gắn liền với một category nghiệp vụ (account, billing, password, limits, escalation) và có cả bản tiếng Anh lẫn tiếng Việt, nên metadata filtering (`category`, `language`) có ý nghĩa thực tế. Đây cũng là use-case RAG phổ biến nhất ngoài đời, sát với mục tiêu của lab.
 
 ### Data Inventory
 
 | # | Tên tài liệu | Nguồn | Số ký tự | Metadata đã gán |
 |---|--------------|-------|----------|-----------------|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
+| 1 | customer_support_playbook.txt | Mẫu có sẵn của lab | 1703 | category=general, language=en, audience=agent |
+| 2 | faq_account_setup.txt | Nhóm tự soạn | 1429 | category=account, language=en, audience=customer |
+| 3 | faq_billing.txt | Nhóm tự soạn | 1711 | category=billing, language=en, audience=customer |
+| 4 | faq_password_recovery.txt | Nhóm tự soạn | 1567 | category=password, language=en, audience=customer |
+| 5 | faq_service_limits.txt | Nhóm tự soạn | 1427 | category=limits, language=en, audience=customer |
+| 6 | faq_thiet_lap_tai_khoan_vi.txt | Nhóm tự soạn (VI) | 1888 | category=account, language=vi, audience=customer |
+| 7 | faq_thanh_toan_vi.txt | Nhóm tự soạn (VI) | 1914 | category=billing, language=vi, audience=customer |
+| 8 | escalation_policy.md | Nhóm tự soạn | 1866 | category=escalation, language=en, audience=agent |
+
+> Metadata cho từng file được khai báo tập trung trong `data/group_manifest.json` để nạp kèm khi tạo `Document`.
 
 ### Metadata Schema
 
 | Trường metadata | Kiểu | Ví dụ giá trị | Tại sao hữu ích cho retrieval? |
 |----------------|------|---------------|-------------------------------|
-| | | | |
-| | | | |
+| `category` | str | account, billing, password, limits, escalation, general | Thu hẹp tìm kiếm về đúng nhóm nghiệp vụ; tránh nhiễu giữa các FAQ giống nhau về ngôn từ |
+| `language` | str | en, vi | Lọc theo ngôn ngữ câu hỏi; tránh trả về chunk khác ngôn ngữ với người dùng |
+| `audience` | str | customer, agent | Tách tài liệu hướng dẫn khách (FAQ) khỏi tài liệu nội bộ (playbook, escalation policy) |
 
 ---
 
@@ -168,13 +174,15 @@ Chạy 5 benchmark queries của nhóm trên implementation cá nhân của bạ
 
 ### Benchmark Queries & Gold Answers (nhóm thống nhất)
 
-| # | Query | Gold Answer |
-|---|-------|-------------|
-| 1 | | |
-| 2 | | |
-| 3 | | |
-| 4 | | |
-| 5 | | |
+| # | Query | Gold Answer | Chunk nguồn |
+|---|-------|-------------|-------------|
+| 1 | How do I reset a forgotten password? | Bấm "Forgot password" trên trang login, nhập email; link reset gửi trong 2 phút và có hiệu lực 60 phút; mở link, đặt mật khẩu mới rồi xác nhận. | faq_password_recovery.txt |
+| 2 | Which payment methods are accepted? | Visa, Mastercard, American Express; cộng chuyển khoản ngân hàng theo hóa đơn cho gói Enterprise năm. Không hỗ trợ thẻ ghi nợ và PayPal. | faq_billing.txt |
+| 3 | How many documents can I store on the Free plan? | Tối đa 50 tài liệu trên gói Free (Pro: 5.000; Enterprise: không giới hạn cố định). | faq_service_limits.txt |
+| 4 | When should an agent escalate an issue to Engineering? | Khi gặp bug tái hiện được, mã lỗi FAQ không cover, lỗi rate-limit còn sau khi back-off đúng, hoặc nghi ngờ mất dữ liệu — luôn đính kèm request ID và ảnh chụp. | escalation_policy.md |
+| 5 | Làm thế nào để tạo tài khoản mới? *(filter language=vi)* | Mở app.assistant.example/signup, nhập email công việc, bấm "Tạo tài khoản"; email xác minh đến trong 2 phút, bấm link để kích hoạt. | faq_thiet_lap_tai_khoan_vi.txt |
+
+> **Query #5** yêu cầu **metadata filtering** (`language=vi`): nếu không lọc, phiên bản tiếng Anh `faq_account_setup.txt` có thể lẫn vào top-3. Đây là query bắt buộc dùng `search_with_filter()`.
 
 ### Kết Quả Của Tôi
 

@@ -1,0 +1,16 @@
+Câu Hỏi Thường Gặp về Thanh Toán — Trợ Lý Tri Thức AI
+
+Những phương thức thanh toán nào được chấp nhận?
+Trợ lý chấp nhận thẻ tín dụng Visa, Mastercard và American Express, cùng với chuyển khoản ngân hàng theo hóa đơn cho gói Enterprise trả theo năm. Thẻ ghi nợ và PayPal không được hỗ trợ. Thanh toán bằng thẻ được xử lý bằng đơn vị USD.
+
+Tại sao thẻ của tôi bị từ chối?
+Ba nguyên nhân phổ biến nhất là: thẻ hết hạn, số dư không đủ, hoặc ngân hàng chặn giao dịch quốc tế. Hãy cập nhật thẻ tại Cài đặt > Thanh toán > Phương thức, rồi bấm "Thử lại thanh toán". Nếu vẫn lỗi, hãy liên hệ ngân hàng để cho phép giao dịch từ "Knowledge Assistant Inc".
+
+Làm thế nào để được hoàn tiền?
+Hoàn tiền áp dụng trong vòng 14 ngày kể từ ngày bị tính phí đối với gói theo tháng. Mở Cài đặt > Thanh toán > Lịch sử, tìm khoản phí và bấm "Yêu cầu hoàn tiền". Số tiền sẽ trở lại thẻ gốc trong 5 đến 10 ngày làm việc. Gói theo năm không hoàn tiền sau 14 ngày nhưng có thể hủy để dừng gia hạn.
+
+Tôi bị tính phí vào ngày nào mỗi tháng?
+Gói theo tháng được tính phí vào đúng ngày trong tháng mà bạn đăng ký lần đầu. Nếu ngày đó không tồn tại trong một tháng nào đó, khoản phí sẽ dời sang ngày cuối cùng của tháng. Hóa đơn được gửi qua email cho Quản trị viên workspace mỗi lần tính phí.
+
+Làm thế nào để hủy đăng ký?
+Mở Cài đặt > Thanh toán > Gói và bấm "Hủy đăng ký". Quyền truy cập vẫn còn đến hết kỳ đã trả phí, sau đó workspace chuyển về gói miễn phí. Việc hủy không xóa tài liệu của bạn.

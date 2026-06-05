@@ -1,0 +1,50 @@
+{
+  "domain": "Customer Support / FAQ — AI Knowledge Assistant (SaaS)",
+  "metadata_schema": {
+    "category": "account | billing | password | limits | escalation | general",
+    "language": "en | vi",
+    "audience": "customer | agent"
+  },
+  "documents": [
+    {
+      "file": "data/customer_support_playbook.txt",
+      "id": "customer_support_playbook",
+      "metadata": { "category": "general", "language": "en", "audience": "agent" }
+    },
+    {
+      "file": "data/faq_account_setup.txt",
+      "id": "faq_account_setup",
+      "metadata": { "category": "account", "language": "en", "audience": "customer" }
+    },
+    {
+      "file": "data/faq_billing.txt",
+      "id": "faq_billing",
+      "metadata": { "category": "billing", "language": "en", "audience": "customer" }
+    },
+    {
+      "file": "data/faq_password_recovery.txt",
+      "id": "faq_password_recovery",
+      "metadata": { "category": "password", "language": "en", "audience": "customer" }
+    },
+    {
+      "file": "data/faq_service_limits.txt",
+      "id": "faq_service_limits",
+      "metadata": { "category": "limits", "language": "en", "audience": "customer" }
+    },
+    {
+      "file": "data/faq_thiet_lap_tai_khoan_vi.txt",
+      "id": "faq_thiet_lap_tai_khoan_vi",
+      "metadata": { "category": "account", "language": "vi", "audience": "customer" }
+    },
+    {
+      "file": "data/faq_thanh_toan_vi.txt",
+      "id": "faq_thanh_toan_vi",
+      "metadata": { "category": "billing", "language": "vi", "audience": "customer" }
+    },
+    {
+      "file": "data/escalation_policy.md",
+      "id": "escalation_policy",
+      "metadata": { "category": "escalation", "language": "en", "audience": "agent" }
+    }
+  ]
+}
