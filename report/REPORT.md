@@ -1,7 +1,7 @@
 # Báo Cáo Lab 7: Embedding & Vector Store
 
 **Họ tên:** Nguyễn Đức Toàn
-**Nhóm:** G11 — Domain: Customer Support / FAQ
+**Nhóm:** F3 — Domain: Customer Support / FAQ
 **Ngày:** 2026-06-05
 
 > Số liệu đo bằng embedder thật `all-MiniLM-L6-v2` (sentence-transformers), không phải mock. Script tái lập: `python group_demo.py`.
