@@ -47,7 +47,6 @@ class SentenceChunker:
         self.max_sentences_per_chunk = max(1, max_sentences_per_chunk)
 
     def chunk(self, text: str) -> list[str]:
-<<<<<<< HEAD
         if not text:
             return []
 
@@ -73,20 +72,6 @@ class SentenceChunker:
             if combined_chunk:
                 chunks.append(combined_chunk)
 
-=======
-        if not text or not text.strip():
-            return []
-
-        # Split right after a sentence terminator (. ! ?) followed by whitespace.
-        # This covers ". ", "! ", "? " and ".\n" as required.
-        sentences = re.split(r"(?<=[.!?])\s+", text.strip())
-        sentences = [s.strip() for s in sentences if s.strip()]
-
-        chunks: list[str] = []
-        for start in range(0, len(sentences), self.max_sentences_per_chunk):
-            group = sentences[start : start + self.max_sentences_per_chunk]
-            chunks.append(" ".join(group))
->>>>>>> 3ef2405e66a067c795d70f09e71525bf8fa1d630
         return chunks
 
 
@@ -110,27 +95,17 @@ class RecursiveChunker:
         return self._split(text, self.separators)
 
     def _split(self, current_text: str, remaining_separators: list[str]) -> list[str]:
-<<<<<<< HEAD
         # Điểm dừng đệ quy: nếu kích thước text đã nhỏ hơn hoặc bằng chunk_size mong muốn
         if len(current_text) <= self.chunk_size:
             return [current_text]
 
         # Nếu không còn ký tự phân tách nào hoặc gặp ký tự rỗng "", thực hiện cắt ép buộc theo chunk_size
         if not remaining_separators:
-=======
-        # Small enough already — keep as a single chunk.
-        if len(current_text) <= self.chunk_size:
-            return [current_text] if current_text else []
-
-        # No separator left (or the empty-string separator) — hard split by size.
-        if not remaining_separators or remaining_separators[0] == "":
->>>>>>> 3ef2405e66a067c795d70f09e71525bf8fa1d630
             return [
                 current_text[i : i + self.chunk_size]
                 for i in range(0, len(current_text), self.chunk_size)
             ]
 
-<<<<<<< HEAD
         sep = remaining_separators[0]
         next_seps = remaining_separators[1:]
 
@@ -170,21 +145,6 @@ class RecursiveChunker:
             final_chunks.append(sep.join(current_good_chunk))
 
         return final_chunks
-=======
-        separator = remaining_separators[0]
-        rest = remaining_separators[1:]
-
-        chunks: list[str] = []
-        for part in current_text.split(separator):
-            if not part:
-                continue
-            if len(part) <= self.chunk_size:
-                chunks.append(part)
-            else:
-                # Still too big — try the next, finer separator.
-                chunks.extend(self._split(part, rest))
-        return chunks
->>>>>>> 3ef2405e66a067c795d70f09e71525bf8fa1d630
 
 
 def _dot(a: list[float], b: list[float]) -> float:
@@ -199,7 +159,6 @@ def compute_similarity(vec_a: list[float], vec_b: list[float]) -> float:
 
     Returns 0.0 if either vector has zero magnitude.
     """
-<<<<<<< HEAD
     # Tính độ dài (magnitude) của từng vector
     mag_a = math.sqrt(sum(x * x for x in vec_a))
     mag_b = math.sqrt(sum(x * x for x in vec_b))
@@ -209,20 +168,12 @@ def compute_similarity(vec_a: list[float], vec_b: list[float]) -> float:
         return 0.0
 
     return _dot(vec_a, vec_b) / (mag_a * mag_b)
-=======
-    norm_a = math.sqrt(_dot(vec_a, vec_a))
-    norm_b = math.sqrt(_dot(vec_b, vec_b))
-    if norm_a == 0.0 or norm_b == 0.0:
-        return 0.0
-    return _dot(vec_a, vec_b) / (norm_a * norm_b)
->>>>>>> 3ef2405e66a067c795d70f09e71525bf8fa1d630
 
 
 class ChunkingStrategyComparator:
     """Run all built-in chunking strategies and compare their results."""
 
     def compare(self, text: str, chunk_size: int = 200) -> dict:
-<<<<<<< HEAD
         # Khởi tạo 3 chiến lược chunking cơ bản theo cấu hình bài Lab
         strategies = {
             "fixed_size": FixedSizeChunker(chunk_size=chunk_size, overlap=20),
@@ -245,21 +196,3 @@ class ChunkingStrategyComparator:
             }
 
         return comparison_results
-=======
-        strategies = {
-            "fixed_size": FixedSizeChunker(chunk_size=chunk_size).chunk(text),
-            "by_sentences": SentenceChunker().chunk(text),
-            "recursive": RecursiveChunker(chunk_size=chunk_size).chunk(text),
-        }
-
-        comparison: dict = {}
-        for name, chunks in strategies.items():
-            count = len(chunks)
-            avg_length = sum(len(c) for c in chunks) / count if count else 0.0
-            comparison[name] = {
-                "count": count,
-                "avg_length": avg_length,
-                "chunks": chunks,
-            }
-        return comparison
->>>>>>> 3ef2405e66a067c795d70f09e71525bf8fa1d630
