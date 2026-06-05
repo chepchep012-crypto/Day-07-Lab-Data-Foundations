@@ -14,7 +14,11 @@ Usage:
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 from src import (
     ChunkingStrategyComparator,
