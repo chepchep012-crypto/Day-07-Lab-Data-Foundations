@@ -53,7 +53,8 @@ def load_manifest_documents() -> list[dict]:
 
 
 def build_store(raw_docs: list[dict], chunker) -> EmbeddingStore:
-    store = EmbeddingStore(collection_name="cs_faq", embedding_fn=embedder)
+    # use_chroma=True -> persist embeddings to a real ChromaDB on disk (./chroma_db)
+    store = EmbeddingStore(collection_name="cs_faq", embedding_fn=embedder, use_chroma=True)
     chunk_docs: list[Document] = []
     for d in raw_docs:
         for i, chunk in enumerate(chunker.chunk(d["content"])):
@@ -78,19 +79,34 @@ def section_backend() -> None:
     print(f"Embedding backend: {getattr(embedder, '_backend_name', 'mock')}\n")
 
 
-def section_benchmark(store: EmbeddingStore) -> None:
+# Each query carries a "gold" phrase that must appear in the retrieved chunk
+# for it to count as the precise relevant chunk (chunk-level, not just doc-level).
+BENCHMARK_QUERIES = [
+    {"q": "How do I reset a forgotten password?",        "filter": None,                "gold": "Forgot password"},
+    {"q": "Which payment methods are accepted?",          "filter": None,                "gold": "Visa, Mastercard"},
+    {"q": "How many documents can I store on the Free plan?", "filter": None,            "gold": "up to 50 documents"},
+    {"q": "When should an agent escalate an issue to Engineering?", "filter": None,      "gold": "reproducible bugs"},
+    {"q": "Làm thế nào để tạo tài khoản mới?",            "filter": {"language": "vi"},  "gold": "Tạo tài khoản"},
+]
+
+
+def _gold_rank(results: list[dict], gold: str) -> int:
+    """Return the 1-based rank of the first chunk containing the gold phrase, or 0."""
+    gold_low = gold.lower()
+    for rank, r in enumerate(results, start=1):
+        if gold_low in r["content"].lower():
+            return rank
+    return 0
+
+
+def section_benchmark(store: EmbeddingStore) -> list[dict]:
     agent = KnowledgeBaseAgent(store=store, llm_fn=extractive_llm)
-    queries = [
-        ("How do I reset a forgotten password?", None),
-        ("Which payment methods are accepted?", None),
-        ("How many documents can I store on the Free plan?", None),
-        ("When should an agent escalate an issue to Engineering?", None),
-        ("Làm thế nào để tạo tài khoản mới?", {"language": "vi"}),
-    ]
     print("=" * 70)
     print("SECTION 6 — BENCHMARK QUERIES (top-3)")
     print("=" * 70)
-    for n, (q, mfilter) in enumerate(queries, start=1):
+    rows = []
+    for n, item in enumerate(BENCHMARK_QUERIES, start=1):
+        q, mfilter, gold = item["q"], item["filter"], item["gold"]
         if mfilter:
             results = store.search_with_filter(q, top_k=3, metadata_filter=mfilter)
             tag = f" [filter={mfilter}]"
@@ -103,6 +119,37 @@ def section_benchmark(store: EmbeddingStore) -> None:
             print(f"  {rank}. score={r['score']:.3f} doc={r['metadata'].get('doc_id')} | {preview}")
         answer = agent.answer(q, top_k=3)
         print(f"  AGENT: {answer[:160]}")
+
+        gold_rank = _gold_rank(results, gold)
+        points = 2 if gold_rank == 1 else (1 if gold_rank in (2, 3) else 0)
+        rows.append({"n": n, "q": q, "gold_rank": gold_rank, "points": points})
+    return rows
+
+
+def section_summary(rows: list[dict]) -> None:
+    """Auto-scored Retrieval Quality table (rubric: 2 / 1 / 0 points per query)."""
+    print("\n" + "=" * 70)
+    print("RETRIEVAL QUALITY SUMMARY (auto-scored, gold-phrase in top-3)")
+    print("=" * 70)
+    print(f"{'Q':>2}  {'gold@rank':>9}  {'points':>6}  verdict")
+    in_top3 = 0
+    total = 0
+    for row in rows:
+        rank = row["gold_rank"]
+        if rank == 1:
+            verdict = "top-1 chính xác"
+        elif rank in (2, 3):
+            verdict = f"relevant ở top-{rank} (không phải top-1)"
+        else:
+            verdict = "MISS — không có chunk đúng trong top-3"
+        if rank:
+            in_top3 += 1
+        total += row["points"]
+        rank_str = str(rank) if rank else "-"
+        print(f"{row['n']:>2}  {rank_str:>9}  {row['points']:>5}/2  {verdict}")
+    print("-" * 70)
+    print(f"Precision (chunk đúng trong top-3): {in_top3}/5")
+    print(f"Retrieval Quality score: {total}/10")
 
 
 def section_comparator(raw_docs: list[dict]) -> None:
@@ -141,9 +188,10 @@ def main() -> None:
     store = build_store(raw_docs, MY_CHUNKER)
     print(f"Loaded {len(raw_docs)} docs -> {store.get_collection_size()} chunks "
           f"(strategy={MY_CHUNKER.__class__.__name__})\n")
-    section_benchmark(store)
+    rows = section_benchmark(store)
     section_comparator(raw_docs)
     section_similarity()
+    section_summary(rows)
 
 
 if __name__ == "__main__":

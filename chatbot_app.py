@@ -138,6 +138,11 @@ with st.sidebar:
     sentences = st.slider("max_sentences_per_chunk", 1, 5, 2)
     size = st.slider("chunk_size (Fixed/Recursive)", 100, 500, 200, step=50)
     top_k = st.slider("top_k (số chunk lấy về)", 1, 5, 3)
+    min_score = st.slider(
+        "Ngưỡng liên quan tối thiểu (cosine score)",
+        0.0, 1.0, 0.35, step=0.05,
+        help="Nếu score cao nhất < ngưỡng này, bot sẽ báo không có nội dung liên quan thay vì trả lời.",
+    )
 
     st.divider()
     st.subheader("🏷️ Metadata filter")
@@ -203,12 +208,21 @@ def handle(question: str) -> None:
 
     if metadata_filter:
         results = store.search_with_filter(question, top_k=top_k, metadata_filter=metadata_filter)
-        if results:
-            answer = grounded_llm(build_context_prompt(question, results))
-        else:
-            answer = "Không có tài liệu nào khớp bộ lọc metadata hiện tại."
     else:
         results = store.search(question, top_k=top_k)
+
+    top_score = results[0]["score"] if results else None
+
+    if top_score is None or top_score < min_score:
+        # Không đủ liên quan → từ chối trả lời thay vì bịa.
+        answer = (
+            "🤷 Xin lỗi, mình **không tìm thấy nội dung liên quan** trong tài liệu cho câu hỏi này"
+            + (f" (score cao nhất {top_score:.3f} < ngưỡng {min_score:.2f})." if top_score is not None
+               else " (không có tài liệu nào khớp bộ lọc).")
+        )
+    elif metadata_filter:
+        answer = grounded_llm(build_context_prompt(question, results))
+    else:
         answer = agent.answer(question, top_k=top_k)  # uses KnowledgeBaseAgent + grounded_llm
 
     st.session_state.messages.append(
