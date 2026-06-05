@@ -1,0 +1,16 @@
+Service Limits and Quotas FAQ for the AI Knowledge Assistant
+
+How many documents can I store on each plan?
+The Free plan stores up to 50 documents. The Pro plan stores up to 5,000 documents. The Enterprise plan has no fixed document cap and is limited only by the contracted storage volume. Counts include every uploaded file, not chunks.
+
+What is the maximum file size for a single upload?
+A single file may be at most 20 MB on Free and Pro plans, and up to 100 MB on Enterprise. Supported formats are PDF, Markdown, plain text, and Word documents. Files larger than the limit must be split before uploading.
+
+How many search queries can I run per day?
+Free allows 100 queries per day, Pro allows 5,000 queries per day, and Enterprise is unmetered. The daily counter resets at 00:00 UTC. When the limit is reached, search returns a "quota exceeded" message until the reset.
+
+What is the rate limit for the API?
+The API allows 60 requests per minute on Pro and 600 requests per minute on Enterprise. Exceeding the limit returns HTTP 429 with a Retry-After header. Clients should back off and retry after the number of seconds in that header.
+
+How long are deleted documents retained?
+Deleted documents move to a trash area and are permanently removed after 30 days. During those 30 days an Admin can restore them from Settings > Documents > Trash. After 30 days the data and its embeddings are deleted and cannot be recovered.

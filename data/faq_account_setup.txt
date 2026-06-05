@@ -1,0 +1,16 @@
+Account Setup FAQ for the AI Knowledge Assistant
+
+How do I create a new account?
+Open the sign-up page at app.assistant.example/signup, enter your work email, and click "Create account". A verification email arrives within 2 minutes. Click the verification link to activate the account. If the email does not arrive, check the spam folder before requesting a resend.
+
+How do I verify my email address?
+After signing up, open the message titled "Verify your Knowledge Assistant account" and click the blue "Verify email" button. The link expires after 24 hours. If it has expired, return to the login page and click "Resend verification" to receive a fresh link.
+
+How do I invite teammates to my workspace?
+Go to Settings > Members > Invite, type each teammate's work email, choose a role (Admin, Editor, or Viewer), and click "Send invites". Invited users receive an email and must accept within 7 days. Only Admins can invite new members.
+
+What are the three member roles?
+Admin can manage billing, members, and all documents. Editor can create and edit documents but cannot change billing. Viewer can only read documents and run searches. Roles can be changed at any time from Settings > Members.
+
+Why can I not log in right after signing up?
+Login is blocked until the email address is verified. Complete the verification step first. If you verified the email but still cannot log in, reset your password from the login page.

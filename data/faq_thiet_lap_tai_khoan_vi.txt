@@ -1,0 +1,16 @@
+Câu Hỏi Thường Gặp về Thiết Lập Tài Khoản — Trợ Lý Tri Thức AI
+
+Làm thế nào để tạo tài khoản mới?
+Mở trang đăng ký tại app.assistant.example/signup, nhập email công việc và bấm "Tạo tài khoản". Email xác minh sẽ đến trong vòng 2 phút. Bấm vào liên kết trong email để kích hoạt tài khoản. Nếu không thấy email, hãy kiểm tra thư mục spam trước khi yêu cầu gửi lại.
+
+Làm thế nào để xác minh địa chỉ email?
+Sau khi đăng ký, mở thư có tiêu đề "Xác minh tài khoản Trợ Lý Tri Thức" và bấm nút "Xác minh email" màu xanh. Liên kết hết hạn sau 24 giờ. Nếu đã hết hạn, quay lại trang đăng nhập và bấm "Gửi lại xác minh" để nhận liên kết mới.
+
+Làm thế nào để mời đồng nghiệp vào workspace?
+Vào Cài đặt > Thành viên > Mời, nhập email công việc của từng người, chọn vai trò (Quản trị, Biên tập, hoặc Người xem) rồi bấm "Gửi lời mời". Người được mời nhận email và phải chấp nhận trong vòng 7 ngày. Chỉ Quản trị viên mới có quyền mời thành viên mới.
+
+Ba vai trò thành viên là gì?
+Quản trị (Admin) quản lý thanh toán, thành viên và toàn bộ tài liệu. Biên tập (Editor) tạo và sửa tài liệu nhưng không đổi được thanh toán. Người xem (Viewer) chỉ đọc tài liệu và tìm kiếm. Có thể đổi vai trò bất cứ lúc nào trong Cài đặt > Thành viên.
+
+Tại sao tôi không đăng nhập được ngay sau khi đăng ký?
+Việc đăng nhập bị chặn cho đến khi email được xác minh. Hãy hoàn tất bước xác minh trước. Nếu đã xác minh email mà vẫn không đăng nhập được, hãy đặt lại mật khẩu từ trang đăng nhập.
