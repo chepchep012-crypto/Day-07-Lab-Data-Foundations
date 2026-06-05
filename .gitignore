@@ -18,5 +18,5 @@ chroma_db/
 .vscode/
 .idea/
 .omx/
-.venv/
+venv/
 src_w_solution/

@@ -207,3 +207,4 @@ class EmbeddingStore:
         removed = len(remaining) != len(self._store)
         self._store = remaining
         return removed
+>>>>>>> 3ef2405e66a067c795d70f09e71525bf8fa1d630
