@@ -12,4 +12,8 @@ sentence-transformers>=3.0
 openai>=1.0
 
 # Optional: for bonus tasks
+<<<<<<< HEAD
+chromadb>=0.4.0      # Real vector database integration
+=======
  chromadb>=0.4.0      # Real vector database integration
+>>>>>>> 3ef2405e66a067c795d70f09e71525bf8fa1d630

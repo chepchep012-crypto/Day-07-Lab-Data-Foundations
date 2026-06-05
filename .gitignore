@@ -15,5 +15,5 @@ __pycache__/
 .vscode/
 .idea/
 .omx/
-.venv/
+venv/
 src_w_solution/

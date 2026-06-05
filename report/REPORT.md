@@ -1,6 +1,6 @@
 # Báo Cáo Lab 7: Embedding & Vector Store
 
-**Họ tên:** Nguyễn Đức Toàn
+**Họ tên:** Nguyễn Thái Hoàng
 **Nhóm:** G11 — Domain: Customer Support / FAQ
 **Ngày:** 2026-06-05
 
@@ -13,29 +13,42 @@
 ### Cosine Similarity (Ex 1.1)
 
 **High cosine similarity nghĩa là gì?**
-> Hai chunk có cosine similarity cao nghĩa là vector embedding của chúng chỉ về gần cùng một hướng trong không gian nghĩa — tức chúng nói về cùng chủ đề/ý, bất kể độ dài văn bản.
+
+-Về mặt ý nghĩa: High Cosine Similarity (Độ tương đồng Cosine cao) nghĩa là hai đoạn văn bản có nội dung, ngữ cảnh hoặc ý nghĩa rất giống nhau, ngay cả khi chúng sử dụng các từ ngữ khác nhau.
+
+-Về mặt hình học: Điểm số này càng cao (gần bằng 1) chứng tỏ góc giữa hai vector của hai text đó trong không gian đa chiều càng nhỏ, nghĩa là chúng đang cùng chỉ về một hướng tri thức.
+
+-Trong hệ thống RAG: Khi một câu hỏi và một chunk tài liệu có độ tương đồng cosine cao, điều đó đồng nghĩa với việc chunk đó chứa thông tin phù hợp nhất để trích xuất làm ngữ cảnh (context) trả lời cho câu hỏi.
 
 **Ví dụ HIGH similarity:**
-- Sentence A: "How do I reset my password?"
-- Sentence B: "I forgot my password, how can I recover it?"
-- Tại sao tương đồng: Cùng ý định (khôi phục mật khẩu), cùng trường từ vựng → vector gần nhau (đo thực tế: 0.834).
+- Sentence A:"Làm thế nào để cài đặt Python trên máy tính?"
+- Sentence B:"Hướng dẫn setup môi trường lập trình Python cho người mới bắt đầu."
+- Tại sao tương đồng:Dù sử dụng từ vựng khác nhau ("cài đặt" vs "setup", "máy tính" vs "môi trường lập trình"), cả hai câu đều chung một ý định (intent) và ngữ nghĩa cốt lõi là hướng dẫn chuẩn bị công cụ để chạy Python.
 
 **Ví dụ LOW similarity:**
-- Sentence A: "Which payment methods are accepted?"
-- Sentence B: "Brown bears live in northern forests."
-- Tại sao khác: Khác hoàn toàn chủ đề, không chung ngữ cảnh → vector gần như trực giao (đo thực tế: -0.010).
+- Sentence A:"Thuật toán sắp xếp nhanh (QuickSort) có độ phức tạp trung bình là $O(n \log n)$."
+- Sentence B:"Hôm nay thời tiết Hà Nội chuyển mưa dông vào buổi chiều."
+- Tại sao khác:Hai câu thuộc hai lĩnh vực hoàn toàn tách biệt (khoa học máy tính vs khí tượng), không có bất kỳ điểm chung nào về từ vựng, ngữ cảnh hay ý nghĩa cốt lõi.
 
 **Tại sao cosine similarity được ưu tiên hơn Euclidean distance cho text embeddings?**
-> Cosine chỉ quan tâm **hướng** của vector chứ không quan tâm độ lớn, nên không bị ảnh hưởng bởi độ dài văn bản (chunk dài có vector lớn hơn). Hai đoạn cùng nghĩa nhưng khác độ dài vẫn được coi là tương đồng, trong khi Euclidean sẽ phạt sự chênh lệch độ lớn.
+Cosine similarity được ưu tiên hơn vì nó chỉ đo hướng (góc giữa hai vector) chứ không bị ảnh hưởng bởi độ dài của đoạn văn bản như Euclidean distance. Trong text embeddings, một tài liệu dài và một tài liệu ngắn dù có cùng nội dung ngữ nghĩa vẫn sẽ bị Euclidean distance coi là "xa nhau" do độ dài vector khác biệt lớn.
+
+Do đó, cosine similarity giúp hệ thống RAG tập trung hoàn toàn vào sự tương đồng về mặt ý nghĩa thay vì kích thước văn bản.
 
 ### Chunking Math (Ex 1.2)
 
 **Document 10,000 ký tự, chunk_size=500, overlap=50. Bao nhiêu chunks?**
-> Phép tính: `num_chunks = ceil((10000 - 50) / (500 - 50)) = ceil(9950 / 450) = ceil(22.11)`
-> Đáp án: **23 chunks**.
+
+Bước nhảy giữa các chunk (step): $\text{step} = \text{chunk\_size} - \text{overlap} = 500 - 50 = 450 \text{ ký tự}$
+
+Số lượng chunks được tính theo công thức: $\text{Số chunks} = \left\lceil \frac{\text{Tổng ký tự} - \text{overlap}}{\text{step}} \right\rceil$
+
+Áp dụng số liệu: $\text{Số chunks} = \left\lceil \frac{10000 - 50}{450} \right\rceil = \left\lceil \frac{9950}{450} \right\rceil = \left\lceil 22.11 \right\rceil = 23$
+> *Đáp án: 23 chunks*
 
 **Nếu overlap tăng lên 100, chunk count thay đổi thế nào? Tại sao muốn overlap nhiều hơn?**
-> `ceil((10000 - 100) / (500 - 100)) = ceil(9900 / 400) = ceil(24.75) = 25 chunks` — tăng từ 23 lên **25**. Overlap nhiều hơn giúp giữ ngữ cảnh vắt qua ranh giới chunk (câu/ý bị cắt vẫn xuất hiện trọn vẹn ở chunk kế), giảm rủi ro mất thông tin khi retrieve, đổi lại tốn thêm lưu trữ và tính toán.
+> *Số lượng chunks sẽ tăng lên (từ 23 thành 25 chunks) do bước nhảy (step) giữa các chunk giảm xuống từ 450 còn 400 ký tự. Tại sao muốn overlap nhiều hơn: Overlap lớn hơn giúp giữ nguyên ngữ cảnh liên tục tại ranh giới cắt, ngăn chặn việc các thông tin quan trọng bị chia cắt làm đôi giữa hai chunk khiến mô hình embedding không hiểu đầy đủ ý nghĩa.*
+
 
 ---
 
